@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>edu.uom</groupId>
-	<artifactId>userregistration</artifactId>
+	<artifactId>usermanagement</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>userregistration</name>
-	<description>User Registration Microservice example</description>
+	<name>usermanagement</name>
+	<description>User Management Microservice example</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -41,7 +41,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<start-class>edu.uom.userregistration.UserRegistrationApplication</start-class>
+		<start-class>edu.uom.usermanagement.Application</start-class>
 		<java.version>1.7</java.version>
 	</properties>
 

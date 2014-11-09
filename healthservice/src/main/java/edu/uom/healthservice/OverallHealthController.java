@@ -1,4 +1,4 @@
-package edu.uom;
+package edu.uom.healthservice;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -27,7 +27,6 @@ public class OverallHealthController {
 			response.put("Service1", "DOWN " + e.getMessage());	
 		}
 
-		
 		try {
 			String response2 = template.getForObject(new URI("http://localhost:18080/health"), String.class);
 			response.put("Service2", "OK" + response2);

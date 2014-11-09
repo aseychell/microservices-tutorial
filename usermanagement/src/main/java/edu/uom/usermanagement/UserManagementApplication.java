@@ -1,16 +1,18 @@
-package edu.uom;
+package edu.uom.usermanagement;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
-public class Application {
+@EnableWebMvc
+public class UserManagementApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(UserManagementApplication.class, args);
     }
 }
