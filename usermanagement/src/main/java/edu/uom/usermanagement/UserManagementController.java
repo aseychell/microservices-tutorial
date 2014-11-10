@@ -1,5 +1,10 @@
 package edu.uom.usermanagement;
 
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,11 +15,23 @@ import edu.uom.usermanagement.busobject.AddUserModelResponse;
 @RestController
 public class UserManagementController {
 
+	@Autowired
+	private RabbitTemplate rabbitTemplate;
+	
+	@Autowired
+	private Queue queue;
+	
 	@RequestMapping(value="/addUser", method=RequestMethod.POST)
-	public AddUserModelResponse addUser(AddUserModel model) {
+	public AddUserModelResponse addUser(@RequestBody AddUserModel model) {
+		
+		if (!StringUtils.hasText(model.getUsername()) || !StringUtils.hasText(model.getEmail())) {
+			throw new IllegalArgumentException("Username and email are required!");
+		}
 		
 		final AddUserModelResponse response = new AddUserModelResponse();
 		
+		// Broadcast 
+		rabbitTemplate.convertAndSend(queue.getName(), "NEW USER|" + model.getUsername() + "|" + model.getEmail());
 		
 		return response;
 	}
