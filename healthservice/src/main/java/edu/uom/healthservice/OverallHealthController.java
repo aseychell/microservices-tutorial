@@ -21,17 +21,29 @@ public class OverallHealthController {
 		RestTemplate template = new RestTemplate();
 		
 		try {
-			String response1 = template.getForObject(new URI("http://localhost:8080/health"), String.class);
-			response.put("Service1", "OK" + response1);
+			String response1 = template.getForObject(new URI("http://localhost:38080/health"), String.class);
+			response.put("Health Service", "OK" + response1);
 		} catch (Exception e) {
-			response.put("Service1", "DOWN " + e.getMessage());	
+			response.put("Health Service", "DOWN " + e.getMessage());	
 		}
 
 		try {
 			String response2 = template.getForObject(new URI("http://localhost:18080/health"), String.class);
-			response.put("Service2", "OK" + response2);
+			response.put("Registration", "OK" + response2);
 		} catch (Exception e) {
-			response.put("Service2", "DOWN " + e.getMessage());	
+			response.put("Registration", "DOWN " + e.getMessage());	
+		}
+		try {
+			String response2 = template.getForObject(new URI("http://localhost:48080/health"), String.class);
+			response.put("User Management", "OK" + response2);
+		} catch (Exception e) {
+			response.put("User Management", "DOWN " + e.getMessage());	
+		}
+		try {
+			String response2 = template.getForObject(new URI("http://localhost:28080/health"), String.class);
+			response.put("Email", "OK" + response2);
+		} catch (Exception e) {
+			response.put("Email", "DOWN " + e.getMessage());	
 		}
 		
 		return response;

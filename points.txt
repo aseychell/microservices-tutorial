@@ -1,0 +1,26 @@
+Introduce example services
+ - User registration (18080) as the public API
+ - User management (48080) service as the underlying user management logic
+ - Email service (28080) listens for user registrations and sends emails
+ - Use of RabbitMQ as broker
+
+How do you manage the health of such services?
+ - What if a service is down?
+ - Provide /health api for each service
+ - /metrics can provide futher details and statistics on the service
+ - Difficult to check each and every service
+ - Provide overall service to check health of all services .. HealthService
+
+How to handle network failure or service down?
+ - The use of RabbitMQ can delay such as execution
+ - Kill email service .. registration will still pass but email is not sent
+ - The broker stores the messages and when the email service is back up 
+	.. recovers these messages
+
+Releasing updates
+ - Change only requires a single service replacement
+
+Try distributing the services on multiple PCs
+
+Motivate the use of Service discovery to remove 
+configruation of location of services and make it dynamic

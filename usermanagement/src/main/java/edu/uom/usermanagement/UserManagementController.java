@@ -21,17 +21,22 @@ public class UserManagementController {
 	@Autowired
 	private Queue queue;
 	
+	private String users = "";
+	
 	@RequestMapping(value="/addUser", method=RequestMethod.POST)
-	public AddUserModelResponse addUser(@RequestBody AddUserModel model) {
+	public AddUserModelResponse addUser(final @RequestBody AddUserModel model) {
 		
 		if (!StringUtils.hasText(model.getUsername()) || !StringUtils.hasText(model.getEmail())) {
 			throw new IllegalArgumentException("Username and email are required!");
 		}
 		
 		final AddUserModelResponse response = new AddUserModelResponse();
-		
-		// Broadcast 
-		rabbitTemplate.convertAndSend(queue.getName(), "NEW USER|" + model.getUsername() + "|" + model.getEmail());
+		if (!users.equals(model.getUsername())) {
+			users = model.getUsername();
+			
+			// Broadcast 
+			rabbitTemplate.convertAndSend(queue.getName(), "NEW USER|" + model.getUsername() + "|" + model.getEmail());
+		}
 		
 		return response;
 	}
