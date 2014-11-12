@@ -1,6 +1,6 @@
-h1. Microservices Example
+# Microservices Example
 
-h2. Setup
+## Setup 
 
 1. Install Java JDK (1.7 or above) http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html
 2. Install Apache Maven (3.0 or above) http://maven.apache.org/
@@ -10,16 +10,11 @@ h2. Setup
 6. Run "mvn clean install" in command prompt inside all services
 7. Run "mvn spring-boot:run" to startup a service
 
-h2. Service Addresses
+## Service Addresses
 
-User Registration : http://localhost:18080
-/register
-
-User Management : http://localhost:48080
-/addUser
-
-Email Service : http://localhost:28080
-Through messageQueue : uom-users
-
-Overall Health Service : http://localhost:38080
-/all
+Service Name | URL | Main URL
+------------ | --- | --------
+User Registration | http://localhost:18080 | http://localhost:18080/register
+User Management | http://localhost:48080 | http://localhost:48080/addUser
+Email Service | http://localhost:28080 | Through messageQueue : uom-users
+Overall Health Service | http://localhost:38080 | http://localhost:38080/all
